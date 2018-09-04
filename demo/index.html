@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script >
+        if (!window['process'])
+            window['process'] = { env: { NODE_ENV: 'production' } };
+        window.uxlPrism = window.uxlPrism || {settings: {}};
+        window.uxlPrism.settings = Object.assign({}, window.uxlPrism.settings, {
+            appsBaseRoute: './'
+        });
+    </script>
+    <script type="module" src="./demo-prism-app.js"></script>
+    <demo-prism-app></demo-prism-app>
+</head>
+<body>
+
+</body>
+</html>
