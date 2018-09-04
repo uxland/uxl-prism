@@ -8,5 +8,3 @@
 `npm i @uxland/uxl-redux`
 
 ## Usage
-
-`import {createAction, createActionThunk, createBasicReducer, createAsyncReducer, ReduxMixin} from '@uxland/uxl-redux'`

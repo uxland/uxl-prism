@@ -1,15 +1,18 @@
 {
   "name": "@uxland/uxl-prism",
-  "version": "3.0.0",
-  "description": "UXLand Polymer Element",
-  "homepage": "https://bitbucket.org/newuibcn/uxl-routing",
-  "author": {
-    "name": "UXLand",
-    "email": "dev@uxland.es",
-    "url": "http://www.uxland.es"
+  "version": "0.0.0-development",
+  "description": "UXLand Prism",
+  "homepage": "https://github.com/uxland/uxl-prism#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uxland/uxl-prism.git"
   },
-  "main": "index.js",
-  "module": "index.js",
+  "bugs": {
+    "url": "https://github.com/uxland/uxl-prism/issues"
+  },
+  "author": "UXLand <dev@uxland.es> (http://www.uxland.es)",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "keywords": [
     "polymer",
     "web components"
@@ -77,6 +80,11 @@
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
-  "repository": "https://bitbucket.org/newuibcn/uxl-prism",
-  "license": "Apache-2.0"
+  "directories": {
+    "test": "test"
+  },
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }
