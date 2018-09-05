@@ -2,7 +2,6 @@ import {LitElement} from "@polymer/lit-element";
 import {bootstrap, BootstrapOptions} from "./bootstrapper";
 import {Redux} from "./mixins/redux";
 import {property} from "@uxland/uxl-polymer2-ts";
-import {viewSelector} from "./view/view-selector";
 import {resolveUrl} from "@polymer/polymer/lib/utils/resolve-url";
 import {importHref} from '@uxland/uxl-utilities/import-href';
 import {isLoggedInSelector} from "./user/selectors";
