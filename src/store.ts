@@ -1,13 +1,13 @@
 import {createStore, combineReducers, Store, Reducer, applyMiddleware} from "redux";
 import thunk from 'redux-thunk';
 import {reducer as localization} from '@uxland/uxl-localization/reducer';
-import {reducer as routing} from 'uxl-routing/reducer';
+import {reducer as routing} from '@uxland/uxl-routing/reducer';
 import {reducer as user, UserState} from './user/reducer';
 import {MainViewType, reducer as view} from './view/reducer';
 import {ApplicationState, reducer as app} from "./app/reducer";
 import {OptionsState, reducer as options} from './options/reducer';
 import {LocalizationState} from "@uxland/uxl-localization";
-import {RoutingState} from "uxl-routing";
+import {RoutingState} from "@uxland/uxl-routing";
 import {Action} from "@uxland/uxl-redux/create-action";
 import {actionsBuilder, eventsBuilder} from "./constants";
 
