@@ -6,7 +6,26 @@ import {resolveUrl} from "@polymer/polymer/lib/utils/resolve-url";
 import {importHref} from '@uxland/uxl-utilities/import-href';
 import {isLoggedInSelector} from "./user/selectors";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
-export class PrismAppBase extends Redux(LitElement){
+export interface Settings {
+    apiUrl: string;
+    logoutUrl?: string;
+    propagateCredentials?: boolean;
+    autoLogin?: boolean;
+    autoLoginUserName?: string;
+    autoLoginPassword?: string;
+    initialDelay?: number;
+    appsBaseRoute?: string;
+    offlineEnabled?: boolean;
+}
+export interface UxlPrism {
+    settings: Settings;
+}
+
+declare interface Window {
+    uxlPrism: UxlPrism;
+}
+export var uxlPrism: UxlPrism;
+export class PrismAppBase extends Redux<any>(LitElement){
     options: BootstrapOptions = {
         fetchUser: undefined,
         apiUrl: uxlPrism.settings.apiUrl,

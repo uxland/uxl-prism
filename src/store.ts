@@ -35,7 +35,7 @@ export const disconnect = () =>{
     store.replaceReducer(createReducer());
     store.dispatch({type: DISCONNECT_ACTION});
 };
-export const injectReducer = <T>(name: string, reducer: Reducer<T>) =>{
+export const injectReducer = (name: string, reducer: Reducer<any, any>) =>{
     reducers[name] = reducer;
     store.replaceReducer(createReducer(reducers));
 };
