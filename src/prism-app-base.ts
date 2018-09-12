@@ -6,6 +6,7 @@ import {resolveUrl} from "@polymer/polymer/lib/utils/resolve-url";
 import {importHref} from '@uxland/uxl-utilities/import-href';
 import {isLoggedInSelector} from "./user/selectors";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
+import {IReduxMixin} from "@uxland/uxl-redux/redux-mixin";
 export interface Settings {
     apiUrl: string;
     logoutUrl?: string;
@@ -25,7 +26,7 @@ declare interface Window {
     uxlPrism: UxlPrism;
 }
 export var uxlPrism: UxlPrism;
-export class PrismAppBase extends Redux<any>(LitElement){
+export class PrismAppBase extends Redux<LitElement>(LitElement) implements IReduxMixin<any>{
     options: BootstrapOptions = {
         fetchUser: undefined,
         apiUrl: uxlPrism.settings.apiUrl,
