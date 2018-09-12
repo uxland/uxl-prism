@@ -8,6 +8,6 @@ export const setUserFetch = (fetch: string | fetchUserFunc) =>{
 }
 let doFetch: fetchUserFunc;
 export const fetchUser = async () =>{
-    let userInfo = await store.dispatch(fetchUserAction(() => doFetch(undefined, undefined)));
+    let userInfo = await store.dispatch(fetchUserAction(() => doFetch(undefined, undefined))());
     return userInfo;
 };

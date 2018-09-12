@@ -25,7 +25,7 @@ export interface UxlPrism {
 declare interface Window {
     uxlPrism: UxlPrism;
 }
-export var uxlPrism: UxlPrism;
+declare var uxlPrism: UxlPrism;
 export class PrismAppBase extends Redux<LitElement>(LitElement) implements IReduxMixin<any>{
     options: BootstrapOptions = {
         fetchUser: undefined,
