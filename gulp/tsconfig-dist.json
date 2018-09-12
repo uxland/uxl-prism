@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "esnext",
+    "module": "es6",
     "target": "es2017",
     "sourceMap": true,
     "declaration": false,
