@@ -3,4 +3,4 @@ import {routingSelectors} from '@uxland/uxl-routing/selectors';
 import {Redux} from "./redux";
 
 
-export const Routing: <T = any>() => (p: any) => IRoutingMixin<T> = () => routingMixin(Redux, routingSelectors);
+export const Routing: <T = any>(p: any) => IRoutingMixin<T> = (p) => <any>routingMixin(Redux, routingSelectors)(p);
