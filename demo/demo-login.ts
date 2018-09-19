@@ -4,10 +4,10 @@ import {customElement, listen, property} from "@uxland/uxl-polymer2-ts";
 import {login} from "../src/user/login";
 @customElement('demo-login')
 export class DemoLogin extends Locale(LitElement){
-    _render(props: DemoLogin){
-        return html `<div>
-            <input type="text" value="${props.username}" class="input-el" prop-name="username">
-            <input type="text" value="${props.password}" class="input-el" prop-name="password">
+    render(){
+        return <any> html `<div>
+            <input type="text" value="${this.username}" class="input-el" prop-name="username">
+            <input type="text" value="${this.password}" class="input-el" prop-name="password">
             <input type="button" id="submit" value="${this.localize('login.submit-label')}">
 </div>`;
     }
@@ -23,7 +23,7 @@ export class DemoLogin extends Locale(LitElement){
             this[propName] = target.value;
     }
     @listen(`click`, `#submit`)
-    onSubmit(e){
+    onSubmit(){
         console.log('submit');
         if(this.username && this.password)
             login(this.username, this.password);

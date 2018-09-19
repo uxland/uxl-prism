@@ -4,7 +4,7 @@ import {customElement} from "@uxland/uxl-polymer2-ts";
 
 @customElement('module1-page')
 export class Page1 extends Locale(LitElement){
-    _render(){
+    render(){
         return html`<h1>${this.localize('module1.page')}</h1>`
     }
 }

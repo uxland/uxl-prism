@@ -26,7 +26,7 @@ declare interface Window {
     uxlPrism: UxlPrism;
 }
 declare var uxlPrism: UxlPrism;
-export class PrismAppBase extends Redux<LitElement>(LitElement) implements IReduxMixin<any>{
+export abstract class PrismAppBase extends Redux(LitElement) implements IReduxMixin<any>{
     options: BootstrapOptions = {
         fetchUser: undefined,
         apiUrl: uxlPrism.settings.apiUrl,
@@ -37,9 +37,9 @@ export class PrismAppBase extends Redux<LitElement>(LitElement) implements IRedu
     };
     connectedCallback(){
         super.connectedCallback();
-        this.initialize();
+        this.initApp();
     }
-    protected initialize(){
+    protected initApp(){
         bootstrap(this.options);
     }
     protected getPagePath(page: any): string {

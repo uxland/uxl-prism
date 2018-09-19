@@ -8,7 +8,7 @@ import '@polymer/iron-pages/iron-pages';
 import {routerRegion} from '@uxland/uxl-routed-region/router-region-decorator';
 @customElement('demo-prism-shell')
 export class DemoPrismShell extends RegionHost(PrismShellMixin(LitElement)){
-    _render(props: DemoPrismShell){
+    render(){
         return html `
         <div id="nav"></div>
         <iron-pages id="routed-region"></iron-pages>`

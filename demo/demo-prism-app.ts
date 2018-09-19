@@ -20,7 +20,7 @@ const user = {
     ]
 };
 const fetchUser = (uname, pwd) => uname && pwd ? Promise.resolve(user) : Promise.reject('invalid credentials');
-const paths = {login: './demo-login.js', shell: './demo-prism-shell.js'}
+const paths = {login: './demo-login.js', shell: './demo-prism-shell.js'};
 @customElement('demo-prism-app')
 export class DemoPrismApp extends PrismAppBase{
     constructor() {
@@ -30,7 +30,7 @@ export class DemoPrismApp extends PrismAppBase{
     getPagePath(view: string){
         return paths[view];
     }
-    _render(){
+    render(){
         switch (this.currentView) {
             case 'login':
                 return html `<demo-login></demo-login>`;
