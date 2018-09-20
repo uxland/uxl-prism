@@ -21,6 +21,8 @@ import {LOGOUT_EVENT} from "./disconnect";
 import {regionManager} from '@uxland/uxl-regions/region-manager';
 import {router, init as initRouter} from "./router";
 import * as polymerSettings from "@polymer/polymer/lib/utils/settings";
+import {apiUrlSelector} from "./options/api-url-selector";
+import {withBaseUrl} from "@uxland/uxl-fetch-client";
 
 export interface IBootstrapper {
     run(): Promise<any>;
@@ -67,6 +69,8 @@ class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
     appInitialized: boolean;
     @property({statePath: appsBaseRouteSelector})
     appsBaseRoute: string;
+    @property({statePath: apiUrlSelector})
+    apiUrl: string;
     async run(): Promise<any> {
         setAppInitialized(false);
         setOptions({appsBaseRoute: this.options.appsBaseRoute, modulesBaseRootPath: this.options.moduleBaseRoute, apiUrl: this.options.apiUrl});
@@ -82,6 +86,9 @@ class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
     modulesChanged(modules: ModuleInfo[], old: ModuleInfo[]){
         if(this.appInitialized)
             this.handleModulesChanged(modules, old);
+    }
+    apiUrlChanged(apiUrl: string){
+        withBaseUrl(apiUrl);
     }
     private async initializeUser(){
         setUserLogin(this.options.fetchUser);
