@@ -51,8 +51,8 @@ export interface IModule{
 
 type modulePostFn = <T = any>(mi: ModuleInfo, module: IModule) => Promise<T>;
 
-const moduleLoader = (module: ModuleInfo, appsBaseRoute: string, postFn : modulePostFn) =>
-    importHref(module.url || `${polymerSettings['rootPath']}${appsBaseRoute}${module.folder}/main.js`).then(m => postFn(module, m));
+const moduleLoader = (module: ModuleInfo, appsBaseRoute: string, postFn : modulePostFn) => import(`@uxland-admin/${module.folder}/main.js` ).then(m => postFn(module, m));
+    // importHref(module.url || `${polymerSettings['rootPath']}${appsBaseRoute}${module.folder}/main.js`).then(m => postFn(module, m));
 
 const moduleInitializer: modulePostFn = (mi, module) => module.initialize(mi);
 const moduleDisposer: modulePostFn = (mi, module) => module.dispose(mi);
