@@ -1,4 +1,4 @@
-import {LitElement} from "@polymer/lit-element";
+import {LitElement} from "lit-element";
 import {bootstrap, BootstrapOptions} from "./bootstrapper";
 import {Redux} from "./mixins/redux";
 import {property} from "@uxland/uxl-polymer2-ts";

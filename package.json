@@ -49,11 +49,11 @@
     "semantic-release": "^15.9.12",
     "sinon": "^6.0.0",
     "travis-deploy-once": "^5.0.7",
-    "typescript": "^3.0.1",
+    "typescript": "^3.2.4",
     "wct-browser-legacy": "^1.0.0"
   },
   "dependencies": {
-    "@polymer/lit-element": "^0.6.1",
+    "lit-element": "^2.0.0-rc.3",
     "@polymer/polymer": "^3.0.2",
     "@uxland/uxl-fetch-client": "^1.0.0",
     "@uxland/uxl-localization": "^1.0.2",
