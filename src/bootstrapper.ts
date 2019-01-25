@@ -45,6 +45,7 @@ const initializeLocalization = (
   if (locales) setLocales(locales);
   if (formats) setFormats(formats);
 };
+
 export interface IModule {
   initialize(moduleInfo: ModuleInfo): Promise<any>;
   dispose(moduleIndo: ModuleInfo): Promise<any>;
