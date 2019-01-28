@@ -48,10 +48,13 @@ export interface IModule{
 }
 
 type modulePostFn = <T = any>(mi: ModuleInfo) => (module: IModule) => Promise<T>;
-
-
-const moduleLoader = (postFn: modulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
-    import(moduleInfo.url || `${polymerSettings['rootPath']}${appsBaseRoute}${moduleInfo.folder}/main.js`).then(postFn(moduleInfo));
+const main = "main.ts";
+const moduleLoader =(postFn: modulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
+    moduleInfo && moduleInfo.localModule
+        ? import(/* webpackChunkName: "localModule" */ `src/${main}`).then(postFn(moduleInfo))
+        : import(/* webpackChunkName: "[request]" */ `@uxland-admin/${
+            moduleInfo.folder
+            }/src/main.ts`).then(postFn(moduleInfo));
 
 const moduleInitializer: modulePostFn = mi => module => module.initialize(mi);
 const moduleDisposer: modulePostFn = mi => module => module.dispose(mi);

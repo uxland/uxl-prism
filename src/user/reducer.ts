@@ -7,6 +7,7 @@ export interface ModuleInfo{
     sortHint?: string;
     url?: string;
     options?: any;
+    localModule?: boolean;
 }
 
 export interface UserInfo{
