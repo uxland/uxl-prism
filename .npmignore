@@ -4,6 +4,3 @@ polymer.json
 tsconfig.json
 wct.config.json
 node_modules/
-test/
-src/
-gulp/
