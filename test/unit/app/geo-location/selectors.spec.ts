@@ -3,16 +3,17 @@ import * as appSelector from "../../../../src/app/selector";
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {GeoLocationState} from "../../../../src/app/geo-location/reducer";
+
 describe('app geo location selectors', () =>{
     beforeEach(() =>{
         sinon.reset();
         sinon.restore();
-    })
+    });
     describe('geo location selector', () =>{
         describe('When invoking geoLocationSelector', () =>{
             describe('and state is undefined', () =>{
                 it('should return undefined', () =>{
-                    sinon.stub(appSelector, 'appSelector').returns(() =>undefined);
+                    sinon.stub(appSelector, 'appSelector').value(() =>undefined);
                     let geoLocation = selectors.geoLocationSelector(undefined);
                     expect(geoLocation).to.be.undefined;
                 });

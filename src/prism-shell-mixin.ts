@@ -1,7 +1,7 @@
 import {dedupingMixin} from "@polymer/polymer/lib/utils/mixin";
 import {Routing} from "./mixins/routing";
 import {IRoutingMixin} from "@uxland/uxl-routing/routing-mixin";
-import {LitElement} from "@polymer/lit-element";
+import {LitElement} from "lit-element";
 
 export const PrismShellMixin = dedupingMixin(parent => {
    class mixin extends Routing(parent){

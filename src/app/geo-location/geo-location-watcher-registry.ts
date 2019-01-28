@@ -1,12 +1,13 @@
 import createAction from "@uxland/uxl-redux/create-action";
 import {REGISTER_GEO_LOCATION_WATCHER, UNREGISTER_GEO_LOCATION_WATCHER} from "./reducer";
-import identity from 'lodash-es/identity';
-import isEmpty from 'lodash-es/isEmpty';
+import identity from 'ramda/es/identity';
+import isEmpty from 'ramda/es/isEmpty';
+import always from 'ramda/es/always';
 import {store} from "../../store";
 import {setLastPosition} from "./set-last-position";
 import {registeredWatchersSelector} from "./selectors";
 const registerWatcherActionCreator = createAction<string, string>(REGISTER_GEO_LOCATION_WATCHER, identity, identity);
-const unregisterWatcherActionCreator = createAction<string, string>(UNREGISTER_GEO_LOCATION_WATCHER, x => undefined, identity);
+const unregisterWatcherActionCreator = createAction<string, string>(UNREGISTER_GEO_LOCATION_WATCHER, always(undefined), identity);
 
 export let watchId: number = undefined;
 const options: PositionOptions = {

@@ -1,12 +1,12 @@
-import {LitElement} from "@polymer/lit-element";
+import {LitElement} from "lit-element";
 import {bootstrap, BootstrapOptions} from "./bootstrapper";
 import {Redux} from "./mixins/redux";
-import {property} from "@uxland/uxl-polymer2-ts";
 import {resolveUrl} from "@polymer/polymer/lib/utils/resolve-url";
 import {importHref} from '@uxland/uxl-utilities/import-href';
 import {isLoggedInSelector} from "./user/selectors";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
 import {IReduxMixin} from "@uxland/uxl-redux/redux-mixin";
+import {statePath} from "@uxland/uxl-redux/state-path";
 export interface Settings {
     apiUrl: string;
     logoutUrl?: string;
@@ -47,9 +47,9 @@ export abstract class PrismAppBase extends Redux(LitElement) implements IReduxMi
     }
      private _currentView: string;
 
-    @property({statePath: isLoggedInSelector})
+    @statePath(isLoggedInSelector)
     loggedIn: boolean;
-    @property({statePath: appInitializedSelector})
+    @statePath(appInitializedSelector)
     initialized: boolean;
     protected get currentView(): string{
         let view = !this.initialized ? 'splash' : this.loggedIn ? 'shell' : 'login';

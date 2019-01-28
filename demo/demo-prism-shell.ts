@@ -1,11 +1,11 @@
 import {PrismShellMixin} from "../src/prism-shell-mixin";
-import {LitElement, html} from "@polymer/lit-element";
 import '@polymer/iron-pages/iron-pages';
-import {customElement} from "@uxland/uxl-polymer2-ts";
 import {RegionHost} from "@uxland/uxl-regions/region-host-mixin";
 import {region} from '@uxland/uxl-regions/region-decorator';
 import '@polymer/iron-pages/iron-pages';
 import {routerRegion} from '@uxland/uxl-routed-region/router-region-decorator';
+import {customElement, LitElement, html} from "lit-element";
+// @ts-ignore
 @customElement('demo-prism-shell')
 export class DemoPrismShell extends RegionHost(PrismShellMixin(LitElement)){
     render(){

@@ -1,7 +1,7 @@
 import {Locale} from "../src/mixins/localization";
-import {LitElement, html} from "@polymer/lit-element";
-import {customElement, listen, property} from "@uxland/uxl-polymer2-ts";
 import {login} from "../src/user/login";
+import {customElement, property, LitElement, html} from "lit-element";
+import {listen} from '@uxland/uxl-utilities/listen';
 @customElement('demo-login')
 export class DemoLogin extends Locale(LitElement){
     render(){
