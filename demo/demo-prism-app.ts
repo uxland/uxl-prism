@@ -1,8 +1,6 @@
 import {PrismAppBase} from "../src/prism-app-base";
 import {fetchUserFunc} from "../src/user/login";
-import {UserInfo} from "../src";
-import {customElement} from "@uxland/uxl-polymer2-ts";
-import {html} from '@polymer/lit-element/lit-element';
+import {html, customElement} from 'lit-element';
 const user = {
     modules: [
         {
@@ -15,7 +13,7 @@ const user = {
         },
         {
             moduleId: 'module3',
-            url: 'http://127.0.0.1:8081/demo/module3/main.js'
+            url: 'http://127.0.0.1:8003/demo/module3/main.js'
         }
     ]
 };

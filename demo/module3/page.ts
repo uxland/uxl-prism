@@ -1,6 +1,5 @@
 import {Locale} from "../../src/mixins/localization";
-import {LitElement, html} from "@polymer/lit-element";
-import {customElement} from "@uxland/uxl-polymer2-ts";
+import {LitElement, html, customElement} from "lit-element";
 
 @customElement('module3-page')
 export class Page3 extends Locale(LitElement){

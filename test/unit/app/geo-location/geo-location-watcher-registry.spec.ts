@@ -33,7 +33,7 @@ describe('geo location watcher registry', () =>{
         });
         describe('and watchId is defined', () =>{
             it('should not subscribe to geoLocation watch event neither set event', () =>{
-                let watchIdStub = sinon.stub(geoLocationWatcherRegistry, 'watchId').value(1111);
+                sinon.stub(geoLocationWatcherRegistry, 'watchId').value(1111);
                 let geoLocation = {watchPosition: sinon.stub().returns(123456)};
                 (<any>navigator).geolocation = geoLocation;
                 geoLocationWatcherRegistry.registerGeoLocationWatcher('my-watcher');
@@ -46,9 +46,9 @@ describe('geo location watcher registry', () =>{
             let st = mockStore({});
             sinon.stub(store, 'store').value(st);
             geoLocationWatcherRegistry.unregisterGeoLocationWatcher('my-watcher-id');
-            expect(st.getActions()).to.be.eql([{type: UNREGISTER_GEO_LOCATION_WATCHER, payload: 'my-watcher-id', meta: 'my-watcher-id'}]);
+            expect(st.getActions()).to.be.eql([{type: UNREGISTER_GEO_LOCATION_WATCHER, meta: 'my-watcher-id'}]);
             geoLocationWatcherRegistry.unregisterGeoLocationWatcher('other-watcher');
-            expect(st.getActions()[1]).to.be.eql({type: UNREGISTER_GEO_LOCATION_WATCHER, payload: 'other-watcher', meta: 'other-watcher'});
+            expect(st.getActions()[1]).to.be.eql({type: UNREGISTER_GEO_LOCATION_WATCHER, meta: 'other-watcher'});
         });
     });
 });

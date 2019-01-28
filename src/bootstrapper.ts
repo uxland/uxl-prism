@@ -7,22 +7,20 @@ import {store} from "./store";
 import {propertiesObserver} from '@uxland/uxl-utilities/properties-observer';
 import {modulesSelector} from "./user/selectors";
 import {ModuleInfo} from "./user/reducer";
-import {property} from '@uxland/uxl-polymer2-ts';
 import {setAppInitialized} from "./app/initialized/set-app-initialized";
 import {init as initApp} from "./app/init";
 import {setOptions} from "./options/set-options";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
-import {importHref} from '@uxland/uxl-utilities/import-href';
 import {appsBaseRouteSelector} from "./options/apps-base-route-selector";
 import {subscribe} from '@uxland/uxl-event-aggregator/event-aggregator';
-import curryRight from "lodash-es/curryRight";
-import unary from 'lodash-es/unary';
+import unary from 'ramda/es/unary';
 import {LOGOUT_EVENT} from "./disconnect";
 import {regionManager} from '@uxland/uxl-regions/region-manager';
 import {router, init as initRouter} from "./router";
 import * as polymerSettings from "@polymer/polymer/lib/utils/settings";
 import {apiUrlSelector} from "./options/api-url-selector";
 import {withBaseUrl} from "@uxland/uxl-fetch-client";
+import {statePath} from "@uxland/uxl-redux/state-path";
 
 export interface IBootstrapper {
     run(): Promise<any>;
@@ -46,30 +44,31 @@ const initializeLocalization = (language: string, locales: Object, formats?: any
 };
 export interface IModule{
     initialize(moduleInfo: ModuleInfo): Promise<any>;
-    dispose(moduleIndo: ModuleInfo): Promise<any>;
+    dispose(moduleInfo: ModuleInfo): Promise<any>;
 }
 
-type modulePostFn = <T = any>(mi: ModuleInfo, module: IModule) => Promise<T>;
+type modulePostFn = <T = any>(mi: ModuleInfo) => (module: IModule) => Promise<T>;
 
-const moduleLoader = (module: ModuleInfo, appsBaseRoute: string, postFn : modulePostFn) =>
-    importHref(module.url || `${polymerSettings['rootPath']}${appsBaseRoute}${module.folder}/main.js`).then(m => postFn(module, m));
 
-const moduleInitializer: modulePostFn = (mi, module) => module.initialize(mi);
-const moduleDisposer: modulePostFn = (mi, module) => module.dispose(mi);
+const moduleLoader = (postFn: modulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
+    import(moduleInfo.url || `${polymerSettings['rootPath']}${appsBaseRoute}${moduleInfo.folder}/main.js`).then(postFn(moduleInfo));
+
+const moduleInitializer: modulePostFn = mi => module => module.initialize(mi);
+const moduleDisposer: modulePostFn = mi => module => module.dispose(mi);
 
 class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
     constructor(protected options: BootstrapOptions){
         super();
-        bind(this, collect(this.constructor, 'properties'), store);
+        bind(this, collect(this.constructor, 'uxlReduxStatePaths'), store);
     }
 
-    @property({statePath: modulesSelector})
+    @statePath(modulesSelector)
     modules: ModuleInfo[];
-    @property({statePath: appInitializedSelector})
+    @statePath(appInitializedSelector)
     appInitialized: boolean;
-    @property({statePath: appsBaseRouteSelector})
+    @statePath(appsBaseRouteSelector)
     appsBaseRoute: string;
-    @property({statePath: apiUrlSelector})
+    @statePath(apiUrlSelector)
     apiUrl: string;
     async run(): Promise<any> {
         setAppInitialized(false);
@@ -105,7 +104,7 @@ class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
         await this.runModules(modules, moduleInitializer);
     }
     private runModules(modules: ModuleInfo[] = [], postFn: modulePostFn): Promise<any>{
-        const loader = curryRight(moduleLoader)(postFn)(this.appsBaseRoute);
+        const loader = moduleLoader(postFn, this.appsBaseRoute);
         return Promise.all(modules.map(unary(loader)));
     }
 
@@ -118,5 +117,5 @@ export const bootstrap = (options: BootstrapOptions): Promise<any> =>{
 };
 subscribe(LOGOUT_EVENT, () => {
     regionManager.clear();
-    router.navigate(window.location.href);
+    router.navigate(window.location.href).then();
 });

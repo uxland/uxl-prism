@@ -1,6 +1,5 @@
-import {customElement} from "@uxland/uxl-polymer2-ts";
 import {Locale} from "../../src/mixins/localization";
-import {LitElement, html} from "@polymer/lit-element";
+import {customElement, LitElement, html} from "lit-element";
 
 @customElement('menu-item-1')
 export class MenuItem1 extends Locale(LitElement){
