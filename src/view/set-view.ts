@@ -1,4 +1,4 @@
-import createAction, {Action} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux/create-action";
 import {MainViewType, SET_VIEW_ACTION} from "./reducer";
 import {store} from "../store";
 

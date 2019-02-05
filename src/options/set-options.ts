@@ -1,4 +1,4 @@
-import createAction, {Action} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux/create-action";
 import {OptionsState, SET_OPTIONS_ACTION} from "./reducer";
 import {store} from "../store";
 

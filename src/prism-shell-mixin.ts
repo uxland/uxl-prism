@@ -1,12 +1,13 @@
 import {dedupingMixin} from "@polymer/polymer/lib/utils/mixin";
 import {Routing} from "./mixins/routing";
-import {IRoutingMixin} from "@uxland/uxl-routing/routing-mixin";
-import {LitElement} from "lit-element";
+import {RoutingMixinConstructor} from "@uxland/uxl-routing/routing-mixin";
+import {MixinFunction} from "@uxland/uxl-utilities/types";
 
-export const PrismShellMixin = dedupingMixin(parent => {
+export type PrismShellMixinFunction = MixinFunction<RoutingMixinConstructor>;
+export const PrismShellMixin: PrismShellMixinFunction = dedupingMixin(parent => {
    class mixin extends Routing(parent){
        subroute: string = '/';
    }
 
-   return (<any>mixin) as IRoutingMixin & LitElement;
+   return <any>mixin;
 });

@@ -1,8 +1,7 @@
 import {fetchUserFunc, setUserLogin} from "./user/login";
 import {fetchUser, setUserFetch} from "./user/fetch";
 import {setFormats, setLanguage, setLocales} from "./mixins/localization";
-import {bind} from "@uxland/uxl-redux/redux-binding";
-import {collect} from '@uxland/uxl-utilities/collect';
+import {bind} from "@uxland/uxl-redux/bind";
 import {store} from "./store";
 import {propertiesObserver} from '@uxland/uxl-utilities/properties-observer';
 import {modulesSelector} from "./user/selectors";
@@ -17,10 +16,11 @@ import unary from 'ramda/es/unary';
 import {LOGOUT_EVENT} from "./disconnect";
 import {regionManager} from '@uxland/uxl-regions/region-manager';
 import {router, init as initRouter} from "./router";
-import * as polymerSettings from "@polymer/polymer/lib/utils/settings";
 import {apiUrlSelector} from "./options/api-url-selector";
 import {withBaseUrl} from "@uxland/uxl-fetch-client";
-import {statePath} from "@uxland/uxl-redux/state-path";
+import {watch} from "@uxland/uxl-redux/watch";
+import {Store, Unsubscribe} from "redux";
+import {PropertyWatch} from "@uxland/uxl-redux";
 
 export interface IBootstrapper {
     run(): Promise<any>;
@@ -47,31 +47,44 @@ export interface IModule{
     dispose(moduleInfo: ModuleInfo): Promise<any>;
 }
 
-type modulePostFn = <T = any>(mi: ModuleInfo) => (module: IModule) => Promise<T>;
-const main = "main.ts";
-const moduleLoader =(postFn: modulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
+export type ModulePostFn = <T = any>(mi: ModuleInfo) => (module: IModule) => Promise<T>;
+//const main = "main.ts";
+/*const moduleLoader =(postFn: modulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
     moduleInfo && moduleInfo.localModule
-        ? import(/* webpackChunkName: "localModule" */ `src/${main}`).then(postFn(moduleInfo))
-        : import(/* webpackChunkName: "[request]" */ `@uxland-admin/${
+        ? import(/!* webpackChunkName: "localModule" *!/ `src/${main}`).then(postFn(moduleInfo))
+        : import(/!* webpackChunkName: "[request]" *!/ `@uxland-admin/${
             moduleInfo.folder
-            }/src/main.ts`).then(postFn(moduleInfo));
+            }/src/main.ts`).then(postFn(moduleInfo));*/
 
-const moduleInitializer: modulePostFn = mi => module => module.initialize(mi);
-const moduleDisposer: modulePostFn = mi => module => module.dispose(mi);
+const moduleInitializer: ModulePostFn = mi => module => module.initialize(mi);
+const moduleDisposer: ModulePostFn = mi => module => module.dispose(mi);
 
-class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
+export abstract class Bootstrapper extends propertiesObserver(<any>Object) implements IBootstrapper{
     constructor(protected options: BootstrapOptions){
         super();
-        bind(this, collect(this.constructor, 'uxlReduxStatePaths'), store);
+        bind(<any>this);
+    }
+    __reduxStoreSubscriptions__: Unsubscribe[];
+
+    private static __uxlReduxWatchedProperties: { [key: string]: PropertyWatch };
+
+    protected static get uxlReduxWatchedProperties(): { [key: string]: PropertyWatch } {
+        if (!this.__uxlReduxWatchedProperties)
+            this.__uxlReduxWatchedProperties = {};
+        return this.__uxlReduxWatchedProperties;
     }
 
-    @statePath(modulesSelector)
+    public static watchProperty(name: PropertyKey, options: PropertyWatch) {
+        this.uxlReduxWatchedProperties[String(name)] = options;
+    }
+
+    @watch(modulesSelector, {store})
     modules: ModuleInfo[];
-    @statePath(appInitializedSelector)
+    @watch(appInitializedSelector, {store})
     appInitialized: boolean;
-    @statePath(appsBaseRouteSelector)
+    @watch(appsBaseRouteSelector, {store})
     appsBaseRoute: string;
-    @statePath(apiUrlSelector)
+    @watch(apiUrlSelector, {store})
     apiUrl: string;
     async run(): Promise<any> {
         setAppInitialized(false);
@@ -106,18 +119,14 @@ class Bootstrapper extends propertiesObserver(Object) implements IBootstrapper{
         await this.runModules(oldModules, moduleDisposer);
         await this.runModules(modules, moduleInitializer);
     }
-    private runModules(modules: ModuleInfo[] = [], postFn: modulePostFn): Promise<any>{
-        const loader = moduleLoader(postFn, this.appsBaseRoute);
+    private runModules(modules: ModuleInfo[] = [], postFn: ModulePostFn): Promise<any>{
+        const loader = this.moduleLoader(postFn, this.appsBaseRoute);
         return Promise.all(modules.map(unary(loader)));
     }
+    protected abstract moduleLoader(postFn: ModulePostFn, appsBaseRout: string): (moduleInfo: ModuleInfo) =>Promise<any>;
 
 }
-const createBootstrapper = (options: BootstrapOptions) =>{
-    return new Bootstrapper(options);
-};
-export const bootstrap = (options: BootstrapOptions): Promise<any> =>{
-    return createBootstrapper(options).run();
-};
+
 subscribe(LOGOUT_EVENT, () => {
     regionManager.clear();
     router.navigate(window.location.href).then();

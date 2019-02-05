@@ -1,12 +1,9 @@
 import {LitElement} from "lit-element";
-import {bootstrap, BootstrapOptions} from "./bootstrapper";
+import {BootstrapOptions} from "./bootstrapper";
 import {Redux} from "./mixins/redux";
-import {resolveUrl} from "@polymer/polymer/lib/utils/resolve-url";
-import {importHref} from '@uxland/uxl-utilities/import-href';
 import {isLoggedInSelector} from "./user/selectors";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
-import {IReduxMixin} from "@uxland/uxl-redux/redux-mixin";
-import {statePath} from "@uxland/uxl-redux/state-path";
+import {watch} from "@uxland/uxl-redux/watch";
 export interface Settings {
     apiUrl: string;
     logoutUrl?: string;
@@ -26,7 +23,7 @@ declare interface Window {
     uxlPrism: UxlPrism;
 }
 declare var uxlPrism: UxlPrism;
-export abstract class PrismAppBase extends Redux(LitElement) implements IReduxMixin<any>{
+export abstract class PrismAppBase extends Redux(LitElement){
     options: BootstrapOptions = {
         fetchUser: undefined,
         apiUrl: uxlPrism.settings.apiUrl,
@@ -39,28 +36,20 @@ export abstract class PrismAppBase extends Redux(LitElement) implements IReduxMi
         super.connectedCallback();
         this.initApp();
     }
-    protected initApp(){
-        bootstrap(this.options);
-    }
+    protected abstract initApp();
     protected getPagePath(page: any): string {
         return null;
     }
      private _currentView: string;
 
-    @statePath(isLoggedInSelector)
+    @watch(isLoggedInSelector)
     loggedIn: boolean;
-    @statePath(appInitializedSelector)
+    @watch(appInitializedSelector)
     initialized: boolean;
     protected get currentView(): string{
         let view = !this.initialized ? 'splash' : this.loggedIn ? 'shell' : 'login';
-        if(view !== this._currentView){
+        if(view !== this._currentView)
             this._currentView = view;
-            if(view){
-                let path = this.getPagePath(view);
-                if(path)
-                    importHref(resolveUrl(path));
-            }
-        }
         return view;
     }
 }

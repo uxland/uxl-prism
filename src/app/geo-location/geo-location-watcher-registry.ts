@@ -1,4 +1,4 @@
-import createAction from "@uxland/uxl-redux/create-action";
+import {createAction} from "@uxland/uxl-redux/create-action";
 import {REGISTER_GEO_LOCATION_WATCHER, UNREGISTER_GEO_LOCATION_WATCHER} from "./reducer";
 import identity from 'ramda/es/identity';
 import isEmpty from 'ramda/es/isEmpty';

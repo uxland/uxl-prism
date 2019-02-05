@@ -1,6 +1,14 @@
 import {PrismAppBase} from "../src/prism-app-base";
 import {fetchUserFunc} from "../src/user/login";
 import {html, customElement} from 'lit-element';
+import {Bootstrapper, ModulePostFn} from "../src/bootstrapper";
+import './demo-login';
+import './demo-prism-shell';
+import {ModuleInfo} from "../src";
+import {regionAdapterRegistry} from "@uxland/uxl-regions/region-adapter-registry";
+import {routingAdapterFactoryFactory} from "@uxland/uxl-routed-region/routing-adapter-factory-factory";
+import {router} from "../src/router";
+import {store} from "../src/store";
 const user = {
     modules: [
         {
@@ -13,21 +21,40 @@ const user = {
         },
         {
             moduleId: 'module3',
-            url: 'http://127.0.0.1:8003/demo/module3/main.js'
+            folder: 'module3'
         }
     ]
 };
 const fetchUser = (uname, pwd) => uname && pwd ? Promise.resolve(user) : Promise.reject('invalid credentials');
-const paths = {login: './demo-login.js', shell: './demo-prism-shell.js'};
+const main = "main.ts";
+/*const moduleLoader =(postFn: ModulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
+    moduleInfo && moduleInfo.localModule
+        // @ts-ignore
+        ? import(/!* webpackChunkName: "localModule" *!/ `src/${main}`).then(postFn(moduleInfo))
+        // @ts-ignore
+        : import(/!* webpackChunkName: "[request]" *!/ `@uxland-admin/${
+            moduleInfo.folder
+            }/src/main.ts`).then(postFn(moduleInfo));*/
+const moduleLoader =(postFn: ModulePostFn, appsBaseRoute: string) => (moduleInfo: ModuleInfo) =>
+    import(moduleInfo.url ? moduleInfo.url : `./${moduleInfo.folder}/main.js`).then(postFn(moduleInfo));
+
+
+class DemoBootstrapper extends Bootstrapper{
+    protected moduleLoader(postFn: ModulePostFn, appsBaseRout: string): (moduleInfo: ModuleInfo) => Promise<any> {
+       return moduleLoader(postFn, this.appsBaseRoute);
+    }
+
+}
 @customElement('demo-prism-app')
 export class DemoPrismApp extends PrismAppBase{
     constructor() {
         super();
         this.options = {...this.options, fetchUser: <fetchUserFunc>fetchUser}
     }
-    getPagePath(view: string){
-        return paths[view];
+    protected initApp() {
+        return new DemoBootstrapper(this.options).run().then(() => regionAdapterRegistry.registerAdapterFactory('iron-pages', routingAdapterFactoryFactory(router, store)));
     }
+
     render(){
         switch (this.currentView) {
             case 'login':

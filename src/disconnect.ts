@@ -1,7 +1,7 @@
 import {eventsBuilder} from "./constants";
 import {publish} from '@uxland/uxl-event-aggregator/event-aggregator';
 import {resetReducers, DISCONNECT_ACTION, store} from "./store";
-import createAction from "@uxland/uxl-redux/create-action";
+import {createAction} from "@uxland/uxl-redux/create-action";
 
 const disconnectActionCreator = createAction(DISCONNECT_ACTION);
 

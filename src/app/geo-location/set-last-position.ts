@@ -1,4 +1,4 @@
-import createAction, {Action} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux/create-action";
 import {SET_LAST_POSITION_ACTION} from "./reducer";
 import {store} from "../../store";
 
