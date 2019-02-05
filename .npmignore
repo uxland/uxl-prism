@@ -4,3 +4,8 @@ polymer.json
 tsconfig.json
 wct.config.json
 node_modules/
+README.md
+demo/
+gulpfile.js
+.travis.yml
+polymer.json
