@@ -1,13 +1,14 @@
 import {AsyncState, Action} from '@uxland/uxl-redux';
 import {createAsyncActions} from "@uxland/uxl-redux/create-async-actions";
 import {actionsBuilder} from '../constants';
+export type ModuleType = 'remote' | 'local' | 'demo';
 export interface ModuleInfo{
     folder?: string;
     moduleId: string;
     sortHint?: string;
     url?: string;
     options?: any;
-    localModule?: boolean;
+    type?: ModuleType;
 }
 
 export interface UserInfo{
