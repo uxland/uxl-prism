@@ -34,7 +34,7 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
         case FETCH_ACTIONS.failed:
             return {...defaultUserState};
         case LOGIN_ACTIONS.failed:
-            return {...defaultUserState, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...action.payload]};
+            return {...defaultUserState, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]]};
         case LOGIN_ACTIONS.succeeded:
         case FETCH_ACTIONS.succeeded:
             return {...defaultUserState, state: action.payload, isLoggedIn: true};
