@@ -53,7 +53,7 @@
   },
   "dependencies": {
     "@polymer/polymer": "^3.0.2",
-    "@uxland/uxl-fetch-client": "^1.0.1",
+    "@uxland/uxl-fetch-client": "^1.0.3",
     "@uxland/uxl-localization": "^2.0.2",
     "@uxland/uxl-redux": "^2.5.1",
     "@uxland/uxl-regions": "^2.0.4",
