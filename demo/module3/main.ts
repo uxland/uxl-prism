@@ -1,8 +1,8 @@
 import {ModuleInfo} from "../../src";
-import {setLocales} from "../../src/mixins/localization";
+import {setLocales} from "../../src/mixins";
 import {locales} from "./locales";
-import {calculateModuleBaseRoute} from "../../src/calculate-module-base.route";
-import {regionManager} from '@uxland/uxl-regions/region-manager';
+import {calculateModuleBaseRoute} from "../../src";
+import {regionManager} from '@uxland/uxl-regions';
 export const initialize = (mi: ModuleInfo) =>{
     console.log('intializing module3');
     setLocales(locales);

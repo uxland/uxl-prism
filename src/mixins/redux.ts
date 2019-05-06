@@ -1,4 +1,4 @@
-import {connect, ConnectMixinFunction} from '@uxland/uxl-redux/connect'
 import {store} from "../store";
+import {ConnectMixinFunction, connect} from "@uxland/lit-redux-connect";
 
-export const Redux: ConnectMixinFunction = connect(store);  //: <T>(p: any) => IReduxMixin<T> = (p: any) => reduxMixin(store)(p);
+export const Redux: ConnectMixinFunction = connect(<any>store);

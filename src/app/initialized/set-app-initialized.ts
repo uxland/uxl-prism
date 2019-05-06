@@ -1,4 +1,4 @@
-import {Action, createAction} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux";
 import {SET_APP_INITIALIZED} from "./reducer";
 import {store} from "../../store";
 

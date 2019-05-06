@@ -1,5 +1,5 @@
 import {actionsBuilder} from "../../constants";
-import {Action} from "@uxland/uxl-redux/create-action";
+import {Action} from "@uxland/uxl-redux";
 
 export interface GeoLocationState {
     lastKnownPosition: Position;

@@ -1,5 +1,4 @@
-import {AsyncState, Action} from '@uxland/uxl-redux';
-import {createAsyncActions} from "@uxland/uxl-redux/create-async-actions";
+import {AsyncState, Action, createAsyncActions} from '@uxland/uxl-redux';
 import {actionsBuilder} from '../constants';
 export type ModuleType = 'remote' | 'local' | 'demo';
 export interface ModuleInfo{

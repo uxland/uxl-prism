@@ -1,6 +1,6 @@
-import createBasicReducer from "@uxland/uxl-redux/create-basic-reducer";
 import {actionsBuilder} from "../constants";
 import {Reducer} from "redux";
+import createBasicReducer from "@uxland/uxl-redux";
 
 export type MainViewType = 'splash' | 'login' | 'shell';
 export const SET_VIEW_ACTION = actionsBuilder('set-view-action');

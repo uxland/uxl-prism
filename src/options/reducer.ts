@@ -1,5 +1,5 @@
 import {actionsBuilder} from "../constants";
-import createBasicReducer from "@uxland/uxl-redux/create-basic-reducer";
+import {createBasicReducer} from "@uxland/uxl-redux";
 import {Reducer} from "redux";
 
 export const SET_OPTIONS_ACTION = actionsBuilder('set-options');

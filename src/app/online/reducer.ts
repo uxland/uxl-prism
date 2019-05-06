@@ -1,5 +1,5 @@
 import {actionsBuilder} from "../../constants";
-import {Action} from "@uxland/uxl-redux/create-action";
+import {Action} from "@uxland/uxl-redux";
 
 export const SET_APP_ONLINE_ACTION = actionsBuilder('set-app-online');
 export const SET_APP_OFFLINE_ACTION = actionsBuilder('set-app-offline');
