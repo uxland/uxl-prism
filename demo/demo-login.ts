@@ -1,9 +1,9 @@
-import {Locale} from "../src/mixins/localization";
-import {login} from "../src/user/login";
+import {locale} from "../src/mixins";
+import {login} from "../src/user";
 import {customElement, property, LitElement, html} from "lit-element";
-import {listen} from '@uxland/uxl-utilities/listen';
+import {listen} from '@uxland/uxl-utilities';
 @customElement('demo-login')
-export class DemoLogin extends Locale(LitElement){
+export class DemoLogin extends locale(LitElement){
     render(){
         return <any> html `<div>
             <input type="text" value="${this.username}" class="input-el" prop-name="username">

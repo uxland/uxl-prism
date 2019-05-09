@@ -1,7 +1,7 @@
 import {PrismShellMixin} from "../src";
 import '@polymer/iron-pages/iron-pages';
 import {region, RegionHost} from "@uxland/uxl-regions";
-import {routerRegion} from '@uxland/uxl-routed-region/router-region-decorator';
+import {routerRegion} from '@uxland/uxl-routed-region';
 import {customElement, html, LitElement} from "lit-element";
 
 @customElement('demo-prism-shell')

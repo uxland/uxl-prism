@@ -6,7 +6,7 @@ import './demo-login';
 import './demo-prism-shell';
 import {ModuleInfo} from "../src";
 import {regionAdapterRegistry} from "@uxland/uxl-regions";
-import {routingAdapterFactoryFactory} from "@uxland/uxl-routed-region/routing-adapter-factory-factory";
+import {routingAdapterFactoryFactory} from "@uxland/uxl-routed-region";
 import {router} from "../src";
 import {store} from "../src";
 const user = {
@@ -52,7 +52,7 @@ export class DemoPrismApp extends PrismAppBase{
         this.options = {...this.options, fetchUser: <fetchUserFunc>fetchUser}
     }
     protected initApp() {
-        return new DemoBootstrapper(this.options).run().then(() => regionAdapterRegistry.registerAdapterFactory('iron-pages', routingAdapterFactoryFactory(router, store)));
+        return new DemoBootstrapper(this.options).run().then(() => regionAdapterRegistry.registerAdapterFactory('iron-pages', <any>routingAdapterFactoryFactory(<any>router, store)));
     }
 
     render(){

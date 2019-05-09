@@ -10,7 +10,7 @@ import {LOGOUT_EVENT} from "./disconnect";
 import {init as initRouter, router} from "./router";
 import {withBaseUrl} from "@uxland/uxl-fetch-client";
 import {Unsubscribe} from "redux";
-import {PropertyWatch} from "@uxland/uxl-redux";
+import {PropertyWatch} from "@uxland/lit-redux-connect";
 import {propertiesObserver} from "@uxland/uxl-utilities";
 import {bind, watch} from "@uxland/lit-redux-connect";
 import {regionManager} from "@uxland/uxl-regions";
