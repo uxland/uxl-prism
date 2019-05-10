@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {Action, createAction} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux";
 import {SET_ORIENTATION_ACTION, ScreenOrientationState} from "./reducer";
 
 

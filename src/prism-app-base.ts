@@ -3,7 +3,7 @@ import {BootstrapOptions} from "./bootstrapper";
 import {Redux} from "./mixins/redux";
 import {isLoggedInSelector} from "./user/selectors";
 import {appInitializedSelector} from "./app/initialized/app-initialized-selector";
-import {watch} from "@uxland/uxl-redux/watch";
+import {watch} from "@uxland/lit-redux-connect";
 export interface Settings {
     apiUrl: string;
     logoutUrl?: string;

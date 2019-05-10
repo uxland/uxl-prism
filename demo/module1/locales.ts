@@ -5,4 +5,4 @@ export const locales ={
            "page": 'module 1'
        }
     }
-}
+};

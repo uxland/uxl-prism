@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {Action} from "@uxland/uxl-redux/create-action";
+import {Action} from "@uxland/uxl-redux";
 import {init as initOrientation} from './orientation/init';
 import {init as initAppOnline} from './online/init';
 const initMethods = [initAppOnline, initOrientation];

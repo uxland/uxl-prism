@@ -1,11 +1,15 @@
-import {localeMixin, LocaleMixinFunction} from '@uxland/uxl-localization/locale-mixin';
-import {localizationSelectors} from '@uxland/uxl-localization/selectors';
-import {localizerFactory} from '@uxland/uxl-localization/localizer-factory';
-import {setLocalesActionCreator} from '@uxland/uxl-localization/locales';
-import {setLanguageActionCreator} from '@uxland/uxl-localization/language';
-import {setFormatsActionCreator} from '@uxland/uxl-localization/formats';
+import {
+    localeMixin,
+    LocaleMixinFunction,
+    localizationSelectors,
+    localizerFactory,
+    setFormatsActionCreator,
+    setLanguageActionCreator,
+    setLocalesActionCreator
+} from '@uxland/uxl-localization';
 import {store} from "../store";
-export const Locale: LocaleMixinFunction = localeMixin(store, localizationSelectors, localizerFactory);
+
+export const locale: LocaleMixinFunction = localeMixin(store, localizationSelectors, localizerFactory);
 export const setFormats = (formats: any) => store.dispatch(setFormatsActionCreator(formats));
 export const setLanguage = (language: string) => store.dispatch(setLanguageActionCreator(language));
 export const setLocales = (locales: Object) => store.dispatch(setLocalesActionCreator(locales));

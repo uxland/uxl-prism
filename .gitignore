@@ -1,13 +1,10 @@
-build/
-dev/
 node_modules/
 .idea/
+lib/
+es/
 src/**/*.js
 src/**/*.js.map
-demo/**/.js
-demo/**/.js.map
 test/**/*.js
 test/**/*.js.map
-!test/unit/setup.js
-package-lock.json
-mochawesome-report
+demo/**/*.js
+demo/**/*.js.map

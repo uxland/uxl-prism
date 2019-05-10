@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {Action, createAction} from "@uxland/uxl-redux/create-action";
+import {Action, createAction} from "@uxland/uxl-redux";
 import {publish} from '@uxland/uxl-event-aggregator/event-aggregator';
 import {SET_APP_ONLINE_ACTION} from "./reducer";
 import {eventsBuilder} from "../../constants";

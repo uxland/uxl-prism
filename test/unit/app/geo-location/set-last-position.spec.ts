@@ -1,12 +1,8 @@
-import * as sinon from 'sinon';
 import * as store from "../../../../src/store";
-import {setLastPosition} from "../../../../src/app/geo-location/set-last-position";
-import {expect} from 'chai';
-import {Action} from "@uxland/uxl-redux/create-action";
-import {SET_LAST_POSITION_ACTION} from "../../../../src/app/geo-location/reducer";
+import {setLastPosition} from "../../../../src/app/geo-location";
+import {SET_LAST_POSITION_ACTION} from "../../../../src/app/geo-location";
 import configureStore from 'redux-mock-store';
-const middlewares  = [];
-const mockStore = configureStore(middlewares);
+const mockStore = configureStore([]);
 describe('set last position', () =>{
     const position: Position = {
         coords: {
@@ -21,16 +17,16 @@ describe('set last position', () =>{
         timestamp: performance.now()
     };
     beforeEach(() =>{
-        sinon.restore();
-        sinon.reset();
-    })
+        jest.restoreAllMocks();
+        jest.resetAllMocks();
+    });
     describe('When invoking set last position', () =>{
         describe('with a position', () =>{
             it('should dispatch an action to the the store', () =>{
-                let st = mockStore({});
-                sinon.stub(store, 'store').value(st);
+                let st: any = mockStore({});
+                (<any>store).store = st;
                 setLastPosition(position);
-                expect(st.getActions()).to.be.eql([{type: SET_LAST_POSITION_ACTION, payload: position}]);
+                expect(st.getActions()).toEqual([{type: SET_LAST_POSITION_ACTION, payload: position}]);
             });
         });
     });

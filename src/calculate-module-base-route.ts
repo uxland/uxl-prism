@@ -1,5 +1,5 @@
-import {ModuleInfo} from "./user/reducer";
-import {appsBaseRouteSelector} from "./options/apps-base-route-selector";
+import {ModuleInfo} from "./user";
+import {appsBaseRouteSelector} from "./options";
 import {store} from "./store";
 import * as settings from '@polymer/polymer/lib/utils/settings';
 export const calculateModuleBaseRoute: (moduleInfo: ModuleInfo) => string = moduleInfo => moduleInfo.url ?

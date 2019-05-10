@@ -1,14 +1,14 @@
-import {PrismAppBase} from "../src/prism-app-base";
-import {fetchUserFunc} from "../src/user/login";
+import {PrismAppBase} from "../src";
+import {fetchUserFunc} from "../src/user";
 import {html, customElement} from 'lit-element';
-import {Bootstrapper, ModulePostFn} from "../src/bootstrapper";
+import {Bootstrapper, ModulePostFn} from "../src";
 import './demo-login';
 import './demo-prism-shell';
 import {ModuleInfo} from "../src";
-import {regionAdapterRegistry} from "@uxland/uxl-regions/region-adapter-registry";
-import {routingAdapterFactoryFactory} from "@uxland/uxl-routed-region/routing-adapter-factory-factory";
-import {router} from "../src/router";
-import {store} from "../src/store";
+import {regionAdapterRegistry} from "@uxland/uxl-regions";
+import {routingAdapterFactoryFactory} from "@uxland/uxl-routed-region";
+import {router} from "../src";
+import {store} from "../src";
 const user = {
     modules: [
         {
@@ -52,7 +52,7 @@ export class DemoPrismApp extends PrismAppBase{
         this.options = {...this.options, fetchUser: <fetchUserFunc>fetchUser}
     }
     protected initApp() {
-        return new DemoBootstrapper(this.options).run().then(() => regionAdapterRegistry.registerAdapterFactory('iron-pages', routingAdapterFactoryFactory(router, store)));
+        return new DemoBootstrapper(this.options).run().then(() => regionAdapterRegistry.registerAdapterFactory('iron-pages', <any>routingAdapterFactoryFactory(<any>router, store)));
     }
 
     render(){
