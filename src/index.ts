@@ -4,7 +4,7 @@ export * from './constants';
 export * from './disconnect';
 export * from './prism-app-base';
 export * from './prism-shell-mixin';
-export * from './router';
+export {init as initRouter, router} from './router';
 export {
   disconnect as storeDisconnect,
   DISCONNECT_ACTION,
@@ -14,4 +14,7 @@ export {
   resetReducers,
   store
 } from './store';
-export { ModuleInfo, ModuleType, UserInfo, UserState } from './user/reducer';
+export * from './app';
+export * from './mixins';
+export * from './options';
+export * from './user';
