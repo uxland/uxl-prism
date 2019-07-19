@@ -88,6 +88,7 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
     apiUrl: string;
     async run(): Promise<any> {
         setAppInitialized(false);
+        withBaseUrl(this.options.apiUrl);
         setOptions({appsBaseRoute: this.options.appsBaseRoute, modulesBaseRootPath: this.options.moduleBaseRoute, apiUrl: this.options.apiUrl});
         initializeLocalization(this.options.language, this.options.locales);
         initApp(store.dispatch);
