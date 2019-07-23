@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@uxland/lit-redux-connect": "^1.0.2",
-    "@uxland/uxl-fetch-client": "^1.0.3",
+    "@uxland/uxl-fetch-client": "^2.0.0",
     "@uxland/uxl-localization": "^3.0.0",
     "@uxland/uxl-redux": "^3.0.5",
     "@uxland/uxl-regions": "^3.0.1",
