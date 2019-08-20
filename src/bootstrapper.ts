@@ -106,7 +106,7 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
     } catch (e) {}
   }
 
-  private async handleModulesChanged(modules: ModuleInfo[], oldModules?: ModuleInfo[]) {
+  protected async handleModulesChanged(modules: ModuleInfo[], oldModules?: ModuleInfo[]) {
     await this.runModules(oldModules, moduleDisposer);
     await this.runModules(modules, moduleInitializer);
   }
