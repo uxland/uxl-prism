@@ -42,7 +42,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
-    "@uxland/lit-redux-connect": "^1.0.2",
+    "@uxland/lit-redux-connect": "^1.1.1",
     "@uxland/uxl-fetch-client": "^2.0.0",
     "@uxland/uxl-localization": "^3.0.0",
     "@uxland/uxl-redux": "^3.0.5",
@@ -80,7 +80,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test:unit && npm run readme:coverage && git add ."
+      "pre-commit": "npm run test:unit ; npm run readme:coverage ; git add ."
     }
   }
 }
