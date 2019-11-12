@@ -20,7 +20,7 @@ export interface UserState<T extends UserInfo> extends AsyncState<T>{
 export const FETCH_USER_ACTION = actionsBuilder('fetch-user');
 export const LOGIN_USER_ACTION = actionsBuilder('login-user');
 const FETCH_ACTIONS = createAsyncActions(FETCH_USER_ACTION);
-const LOGIN_ACTIONS = createAsyncActions(LOGIN_USER_ACTION);
+export const LOGIN_ACTIONS = createAsyncActions(LOGIN_USER_ACTION);
 const getLoginActionMessage = (error: any) =>{
     return error.status == 401 ? error.statusText || 'login.credentials.invalid' : '';
 };
@@ -40,6 +40,8 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
         case FETCH_ACTIONS.ended:
         case LOGIN_ACTIONS.ended:
             return {...state, elapsed: action.elapsed};
+        case LOGIN_ACTIONS.invalidated:
+            return {...state, isLoggedIn: false};
         default:
             return state;
     }
