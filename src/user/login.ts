@@ -1,8 +1,7 @@
 import {loginUserAction} from './actions';
 import {fetchClient} from '@uxland/uxl-fetch-client'
 import {store} from "../store";
-import {UserInfo, LOGIN_ACTIONS} from "./reducer";
-import { createAction } from '@uxland/uxl-redux';
+import {UserInfo} from "./reducer";
 
 export type fetchUserFunc = <T extends UserInfo>(username: string, password: string) => Promise<T>;
 const toAuthorizationHeader = (username: string, password) => ({headers: {Authorization: 'Basic ' + btoa(username + ':' + password)}})
@@ -16,4 +15,3 @@ export const login = async(username: string, password: string) =>{
     let userInfo = await store.dispatch(loginUserAction((uname, pwd) => doLogin(uname, pwd))(username, password));
     return userInfo;
 };
-export const logout = () => store.dispatch(createAction(LOGIN_ACTIONS.invalidated)());
