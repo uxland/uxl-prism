@@ -22,7 +22,14 @@ export const LOGIN_USER_ACTION = actionsBuilder('login-user');
 const FETCH_ACTIONS = createAsyncActions(FETCH_USER_ACTION);
 const LOGIN_ACTIONS = createAsyncActions(LOGIN_USER_ACTION);
 const getLoginActionMessage = (error: any) =>{
-    return error.status == 401 ? error.statusText || 'login.credentials.invalid' : '';
+    switch (error.status) {
+        case 401:
+            return error.statusText || 'login.credentials.invalid';
+        case 402:
+            return error.name;    
+        default:
+            return '';
+    }
 };
 const defaultUserState: UserState<any> = {isLoggedIn: false, didInvalidate: false, error: false, elapsed: null, errorDescription: '', exceptions: null, isFetching: false, state: null, timestamp: null};
 export const reducer: (state: UserState<any>, action: Action) => UserState<any> = (state = defaultUserState, action) =>{
