@@ -51,14 +51,14 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
   switch (action.type) {
     case FETCH_ACTIONS.started:
     case LOGIN_ACTIONS.started:
-      return { ...defaultUserState, isFetching: true };
+      return { ...state, isFetching: true };
     case FETCH_ACTIONS.failed:
-      return { ...defaultUserState };
+      return { ...state };
     case LOGIN_ACTIONS.failed:
-      return { ...defaultUserState, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
+      return { ...state, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
     case LOGIN_ACTIONS.succeeded:
     case FETCH_ACTIONS.succeeded:
-      return { ...defaultUserState, state: action.payload, isLoggedIn: true };
+      return { ...state, state: action.payload, isLoggedIn: true };
     case FETCH_ACTIONS.ended:
     case LOGIN_ACTIONS.ended:
       return { ...state, elapsed: action.elapsed };
