@@ -16,5 +16,13 @@ module.exports = {
     '^.+.ts$': 'ts-jest'
   },
   coverageReporters: ['json-summary', 'text', 'lcov'],
-  collectCoverage: true
+  collectCoverage: true,
+  globals: {
+    'ts-jest': {
+      babelConfig: {
+        comments: false,
+        plugins: ['@babel/plugin-proposal-optional-chaining']
+      }
+    }
+  }
 };

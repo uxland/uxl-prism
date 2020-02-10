@@ -19,6 +19,7 @@
     "web components"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@olavoparno/jest-badges-readme": "^1.3.6",
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
     "@polymer/iron-pages": "^3.0.0-pre.23",
