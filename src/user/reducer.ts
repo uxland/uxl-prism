@@ -58,7 +58,7 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
       return { ...state, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
     case LOGIN_ACTIONS.succeeded:
     case FETCH_ACTIONS.succeeded:
-      return { ...state, state: action.payload, isLoggedIn: true };
+      return { ...state, state: R.mergeDeepLeft(action.payload, state.state), isLoggedIn: true };
     case FETCH_ACTIONS.ended:
     case LOGIN_ACTIONS.ended:
       return { ...state, elapsed: action.elapsed };
