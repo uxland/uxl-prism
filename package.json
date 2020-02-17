@@ -48,7 +48,7 @@
     "@uxland/uxl-localization": "^3.0.1",
     "@uxland/uxl-redux": "^3.0.9",
     "@uxland/uxl-regions": "^3.3.9",
-    "@uxland/uxl-routed-region": "^3.1.2",
+    "@uxland/uxl-routed-region": "^3.1.3",
     "@uxland/uxl-routing": "^3.0.5",
     "@uxland/uxl-utilities": "^3.3.10",
     "lit-element": "^2.0.1",
