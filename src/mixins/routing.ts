@@ -1,5 +1,5 @@
 import {routingMixin, RoutingMixinFunction} from '@uxland/uxl-routing';
 import {routingSelectors} from '@uxland/uxl-routing';
-import {Redux} from "./redux";
+import { store } from "../store";
 
-export const Routing: RoutingMixinFunction = routingMixin(Redux, routingSelectors);
+export const Routing: RoutingMixinFunction = routingMixin(store, routingSelectors);
