@@ -40,7 +40,7 @@
     "semantic-release": "^15.14.0",
     "travis-deploy-once": "^5.0.7",
     "ts-jest": "^24.3.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.2"
   },
   "dependencies": {
     "@uxland/lit-redux-connect": "^1.1.1",
@@ -49,7 +49,7 @@
     "@uxland/uxl-redux": "^3.0.9",
     "@uxland/uxl-regions": "^3.3.9",
     "@uxland/uxl-routed-region": "^3.1.4",
-    "@uxland/uxl-routing": "^3.0.5",
+    "@uxland/uxl-routing": "^3.0.6",
     "@uxland/uxl-utilities": "^3.3.10",
     "lit-element": "^2.0.1",
     "ramda": "^0.26.1",
