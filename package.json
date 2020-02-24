@@ -49,7 +49,7 @@
     "@uxland/uxl-redux": "^3.0.9",
     "@uxland/uxl-regions": "^3.3.9",
     "@uxland/uxl-routed-region": "^3.1.4",
-    "@uxland/uxl-routing": "^3.0.6",
+    "@uxland/uxl-routing": "^3.0.7",
     "@uxland/uxl-utilities": "^3.3.10",
     "lit-element": "^2.0.1",
     "ramda": "^0.26.1",
