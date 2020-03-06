@@ -53,15 +53,15 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
     case LOGIN_ACTIONS.started:
       return { ...state, isFetching: true };
     case FETCH_ACTIONS.failed:
-      return { ...state };
+      return { ...state, isFetching: false };
     case LOGIN_ACTIONS.failed:
-      return { ...state, error: true, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
+      return { ...state, error: true, isFetching: false, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
     case LOGIN_ACTIONS.succeeded:
     case FETCH_ACTIONS.succeeded:
       return { ...state, state: R.mergeDeepLeft(action.payload, state.state || {}), isLoggedIn: true };
     case FETCH_ACTIONS.ended:
     case LOGIN_ACTIONS.ended:
-      return { ...state, elapsed: action.elapsed };
+      return { ...state, elapsed: action.elapsed, isFetching: false };
     case SET_MODULES:
       const modulesLens = R.lensPath(['state', 'modules']);
       return R.set(modulesLens, action.payload, state);
