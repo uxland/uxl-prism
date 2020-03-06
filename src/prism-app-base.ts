@@ -3,7 +3,7 @@ import { LitElement } from 'lit-element';
 import { appInitializedSelector } from './app/initialized/app-initialized-selector';
 import { BootstrapOptions } from './bootstrapper';
 import { Redux } from './mixins/redux';
-import { isLoggedInSelector } from './user/selectors';
+import { isLoggedInSelector, userIsFetchingSelector } from './user/selectors';
 import { MainViewType } from './view';
 import { setView } from './view/set-view';
 export interface Settings {
@@ -54,4 +54,6 @@ export abstract class PrismAppBase extends Redux(LitElement) {
     setView(view);
     return view;
   }
+  @watch(userIsFetchingSelector)
+  isFetching: boolean;
 }
