@@ -1,9 +1,9 @@
 import { fetchClient } from '@uxland/uxl-fetch-client';
 import { store } from '../store';
 import { loginUserAction } from './actions';
-import { Login, UserInfo } from './reducer';
+import { LoginInfo, UserInfo } from './reducer';
 
-export type fetchLoginFunc = <T extends Login>(username: string, password: string) => Promise<T>;
+export type fetchLoginFunc = <T extends LoginInfo>(username: string, password: string) => Promise<T>;
 export type fetchUserFunc = <T extends UserInfo>(username: string, password: string) => Promise<T>;
 const toAuthorizationHeader = (username: string, password) => ({
   headers: { Authorization: 'Basic ' + btoa(username + ':' + password) }
