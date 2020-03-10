@@ -11,7 +11,7 @@ export interface ModuleInfo {
   type?: ModuleType;
 }
 
-export interface Login {}
+export interface LoginInfo {}
 
 export interface UserInfo {
   modules: ModuleInfo[];

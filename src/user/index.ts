@@ -1,6 +1,6 @@
 export * from './actions';
 export * from './fetch';
 export * from './login';
-export { reducer as userReducer, UserState, ModuleInfo, ModuleType, UserInfo } from './reducer';
+export { LoginInfo, ModuleInfo, ModuleType, reducer as userReducer, UserInfo, UserState } from './reducer';
 export * from './selectors';
 export * from './set-modules';
