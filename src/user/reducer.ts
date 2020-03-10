@@ -1,7 +1,7 @@
-import { AsyncState, Action, createAsyncActions } from '@uxland/uxl-redux';
+import { Action, AsyncState, createAsyncActions } from '@uxland/uxl-redux';
+import * as R from 'ramda';
 import { actionsBuilder } from '../constants';
 export type ModuleType = 'remote' | 'local' | 'demo';
-import * as R from 'ramda';
 export interface ModuleInfo {
   folder?: string;
   moduleId: string;
@@ -10,6 +10,8 @@ export interface ModuleInfo {
   options?: any;
   type?: ModuleType;
 }
+
+export interface Login {}
 
 export interface UserInfo {
   modules: ModuleInfo[];
@@ -47,7 +49,10 @@ const defaultUserState: UserState<any> = {
   state: null,
   timestamp: null
 };
-export const reducer: (state: UserState<any>, action: Action) => UserState<any> = (state = defaultUserState, action) => {
+export const reducer: (state: UserState<any>, action: Action) => UserState<any> = (
+  state = defaultUserState,
+  action
+) => {
   switch (action.type) {
     case FETCH_ACTIONS.started:
     case LOGIN_ACTIONS.started:
@@ -55,7 +60,13 @@ export const reducer: (state: UserState<any>, action: Action) => UserState<any> 
     case FETCH_ACTIONS.failed:
       return { ...state, isFetching: false };
     case LOGIN_ACTIONS.failed:
-      return { ...state, error: true, isFetching: false, errorDescription: getLoginActionMessage(action.payload), exceptions: [...[action.payload]] };
+      return {
+        ...state,
+        error: true,
+        isFetching: false,
+        errorDescription: getLoginActionMessage(action.payload),
+        exceptions: [...[action.payload]]
+      };
     case LOGIN_ACTIONS.succeeded:
     case FETCH_ACTIONS.succeeded:
       return { ...state, state: R.mergeDeepLeft(action.payload, state.state || {}), isLoggedIn: true };

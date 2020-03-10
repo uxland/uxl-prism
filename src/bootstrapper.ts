@@ -22,6 +22,7 @@ export interface BootstrapOptions {
   language: string;
   locales?: any;
   fetchUser: string | fetchUserFunc;
+  fetchLogin: string | fetchUserFunc;
   initialRoute?: string;
   moduleBaseRoute?: string;
   apiUrl?: string;
@@ -99,7 +100,7 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
   protected abstract moduleLoader(postFn: ModulePostFn, appsBaseRout: string): (moduleInfo: ModuleInfo) => Promise<any>;
 
   private async initializeUser() {
-    setUserLogin(this.options.fetchUser);
+    setUserLogin(this.options.fetchLogin);
     setUserFetch(this.options.fetchUser);
     try {
       await fetchUser();
