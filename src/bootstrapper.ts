@@ -12,7 +12,15 @@ import { setFormats, setLanguage, setLocales } from './mixins';
 import { apiUrlSelector, appsBaseRouteSelector, setOptions } from './options';
 import { init as initRouter, router } from './router';
 import { store } from './store';
-import { fetchUser, fetchUserFunc, ModuleInfo, modulesSelector, setUserFetch, setUserLogin } from './user';
+import {
+  fetchLoginFunc,
+  fetchUser,
+  fetchUserFunc,
+  ModuleInfo,
+  modulesSelector,
+  setUserFetch,
+  setUserLogin
+} from './user';
 
 export interface IBootstrapper {
   run(): Promise<any>;
@@ -22,7 +30,7 @@ export interface BootstrapOptions {
   language: string;
   locales?: any;
   fetchUser: string | fetchUserFunc;
-  fetchLogin: string | fetchUserFunc;
+  fetchLogin: string | fetchLoginFunc;
   initialRoute?: string;
   moduleBaseRoute?: string;
   apiUrl?: string;
