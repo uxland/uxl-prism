@@ -19,7 +19,7 @@ import {
   ModuleInfo,
   modulesSelector,
   setUserFetch,
-  setUserLogin
+  setUserLogin,
 } from './user';
 
 export interface IBootstrapper {
@@ -51,8 +51,8 @@ export interface IModule {
 
 export type ModulePostFn = <T = any>(mi: ModuleInfo) => (module: IModule) => Promise<T>;
 
-const moduleInitializer: ModulePostFn = mi => module => module.initialize(mi);
-const moduleDisposer: ModulePostFn = mi => module => module.dispose(mi);
+const moduleInitializer: ModulePostFn = (mi) => (module) => module.initialize(mi);
+const moduleDisposer: ModulePostFn = (mi) => (module) => module.dispose(mi);
 
 export abstract class Bootstrapper extends propertiesObserver(<any>Object) implements IBootstrapper {
   private static __uxlReduxWatchedProperties: { [key: string]: PropertyWatch };
@@ -86,7 +86,7 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
     setOptions({
       appsBaseRoute: this.options.appsBaseRoute,
       modulesBaseRootPath: this.options.moduleBaseRoute,
-      apiUrl: this.options.apiUrl
+      apiUrl: this.options.apiUrl,
     });
     initializeLocalization(this.options.language, this.options.locales);
     initApp(store.dispatch);
@@ -122,7 +122,7 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
 
   private runModules(modules: ModuleInfo[] = [], postFn: ModulePostFn): Promise<any> {
     const loader = this.moduleLoader(postFn, this.appsBaseRoute);
-    return Promise.all(modules.map(unary(loader)));
+    return Promise.all(modules.map(unary(loader))).catch((e) => console.log(e));
   }
 }
 
