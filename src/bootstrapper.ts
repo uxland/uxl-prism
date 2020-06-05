@@ -3,6 +3,7 @@ import { subscribe } from '@uxland/uxl-event-aggregator';
 import { withBaseUrl } from '@uxland/uxl-fetch-client';
 import { regionManager } from '@uxland/uxl-regions';
 import { propertiesObserver } from '@uxland/uxl-utilities';
+import equals from 'ramda/es/equals';
 import unary from 'ramda/es/unary';
 import { Unsubscribe } from 'redux';
 import { init as initApp } from './app/init';
@@ -116,8 +117,10 @@ export abstract class Bootstrapper extends propertiesObserver(<any>Object) imple
   }
 
   protected async handleModulesChanged(modules: ModuleInfo[], oldModules?: ModuleInfo[]) {
-    await this.runModules(oldModules, moduleDisposer);
-    await this.runModules(modules, moduleInitializer);
+    if (!equals(modules, oldModules)) {
+      await this.runModules(oldModules, moduleDisposer);
+      await this.runModules(modules, moduleInitializer);
+    }
   }
 
   private runModules(modules: ModuleInfo[] = [], postFn: ModulePostFn): Promise<any> {
