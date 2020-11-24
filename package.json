@@ -60,7 +60,7 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "build:es": "tsc -p tsconfig.build.json --outDir es  ",
+    "build:es": "tsc -p tsconfig.build.json  --target es2018 --outDir es  ",
     "build:cjs": "tsc -p tsconfig.build.json --outDir lib --module commonjs --declaration",
     "build": "npm run build:es && npm run build:cjs",
     "test:ui:watch": "nodemon --watch test --watch src -x \"polymer test --config-file wct.config.json\"",
