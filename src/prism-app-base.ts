@@ -1,11 +1,11 @@
-import { watch } from '@uxland/lit-redux-connect';
-import { LitElement } from 'lit-element';
-import { appInitializedSelector } from './app/initialized/app-initialized-selector';
-import { BootstrapOptions } from './bootstrapper';
-import { Redux } from './mixins/redux';
-import { isLoggedInSelector, userIsFetchingSelector } from './user/selectors';
-import { MainViewType } from './view';
-import { setView } from './view/set-view';
+import { watch } from "@uxland/lit-redux-connect";
+import { LitElement } from "lit";
+import { appInitializedSelector } from "./app/initialized/app-initialized-selector";
+import { BootstrapOptions } from "./bootstrapper";
+import { Redux } from "./mixins/redux";
+import { isLoggedInSelector, userIsFetchingSelector } from "./user/selectors";
+import { MainViewType } from "./view";
+import { setView } from "./view/set-view";
 export interface Settings {
   apiUrl: string;
   logoutUrl?: string;
@@ -31,9 +31,9 @@ export abstract class PrismAppBase extends Redux(LitElement) {
     fetchLogin: undefined,
     apiUrl: uxlPrism.settings.apiUrl,
     locales: { ca: {} },
-    language: 'ca',
+    language: "ca",
     appsBaseRoute: uxlPrism.settings.appsBaseRoute,
-    moduleBaseRoute: '/'
+    moduleBaseRoute: "/",
   };
   connectedCallback() {
     super.connectedCallback();
@@ -50,7 +50,11 @@ export abstract class PrismAppBase extends Redux(LitElement) {
   @watch(appInitializedSelector)
   initialized: boolean;
   public get currentView(): string {
-    let view: MainViewType = !this.initialized ? 'splash' : this.loggedIn ? 'shell' : 'login';
+    let view: MainViewType = !this.initialized
+      ? "splash"
+      : this.loggedIn
+      ? "shell"
+      : "login";
     if (view !== this._currentView) this._currentView = view;
     setView(view);
     return view;
