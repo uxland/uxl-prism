@@ -46,7 +46,7 @@
     "@uxland/lit-redux-connect": "^2.0.0",
     "@uxland/uxl-fetch-client": "^2.0.0",
     "@uxland/uxl-localization": "^4.0.0",
-    "@uxland/uxl-redux": "^3.0.10",
+    "@uxland/uxl-redux": "^4.0.0",
     "@uxland/uxl-regions": "^4.0.0",
     "@uxland/uxl-routed-region": "^4.0.0",
     "@uxland/uxl-routing": "^3.0.7",
